@@ -151,6 +151,7 @@ Only 2 examples of correctly labelled images with a very high probability (>0.99
 #### Traffic sign 2 ('Keep left')
 
 ![enter image description here](https://raw.githubusercontent.com/vincentbarrault/traffic-sign-classifier/master/report_img/keep_left_correct.png)
+
 |                |Detected label                         |Probability (%)                    |
 |----------------|-------------------------------|-----------------------------|
 |1          |Keep left          |99.997292           |

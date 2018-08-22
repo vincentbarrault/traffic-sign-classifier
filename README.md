@@ -92,7 +92,7 @@ For this project, the only differences with the original LeNet architecture are:
 
 ### Discussion on model architecture
 
-### Layers
+#### Layers
 My network is a convolutional neural network, as these tend to do very well with images. The architecture is similar to LeNet-5 neural network, with 2 convolutional layers and 3 fully connected layers. Several trainings were run to try to find the best compromise between training throughput and accuracy:
 - removing 1 of the 2 convolutional layers: the training was then quite faster but the accuracy dropped significantly (>10%). This option has been discarded.
 - removing 1 of the 3 fully connected layers: the training throughput did not change too much and the accuracy went down a little (around 2-3%). This option has been discarded.

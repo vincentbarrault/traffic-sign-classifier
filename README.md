@@ -90,7 +90,30 @@ For this project, the only differences with the original LeNet architecture are:
 | 12 | ReLU activation |- | - |
 | 13 | Full connection |84 | 43 |
 
-The model was trained, then evaluated with a Batch size of **32** and Epoch of **10**:  1 Epoch corresponds to the complete (validation here) data set being passed forward and backward through the neural network.
+### Discussion on model architecture
+
+### Layers
+My network is a convolutional neural network, as these tend to do very well with images. The architecture is similar to LeNet-5 neural network, with 2 convolutional layers and 3 fully connected layers. Several trainings were run to try to find the best compromise between training throughput and accuracy:
+- removing 1 of the 2 convolutional layers: the training was then quite faster but the accuracy dropped significantly (>10%). This option has been discarded.
+- removing 1 of the 3 fully connected layers: the training throughput did not change too much and the accuracy went down a little (around 2-3%). This option has been discarded.
+- Adding 1 more fully connected layer or 1 more convolutional layer: Accuracy was roughly the same (adding less than 1% accuracy), not making enough difference to justify adding another of those layers. This option has been discarded.
+- Using average pooling instead of max pooling did not affect too much the accuracy and the decision was taken to keep max pooling.
+- A dropout with a probability of 0.5 has been added before the fully connected layers. The first 2-3 epochs of validation have then a lower accuracy than without using dropout, but after 10 epochs, the gain is important, around 3% on validation and test accuracy. The dropout has been implemented.
+
+#### Parameters
+The model was trained, then evaluated by using:
+- Adam optimizer: computationally efficient and well suited for large scale problems (data or parameters), this optimizer has a broad adoption for deep learning applications in computer vision, extending the "classic" stochastic gradient descent algorithm,
+- Batch size of **32**,
+- Epoch of **10**:  1 Epoch corresponds to the complete (validation here) data set being passed forward and backward through the neural network. 
+
+Running training/evaluation with a lower number of epoch affects considerably the validation accuracy (see below, validation accuracy is **0.937** at epoch **8** and **0.951** at epoch **10**). The same test was made with a higher number of epochs, this had almost no impact or improvement on the validation accuracy. The decision was taken to use **10** epochs.
+
+The hyperparameters have the following values:
+- mean of 0,
+- standard deviation/sigma of 0.1. 
+
+#### Training and validation of our model
+
 > Training...
 > 
 > EPOCH 1 ... Validation Accuracy = 0.827
@@ -207,6 +230,11 @@ The picture below is taken with an angle which makes recognition by the neural n
 |3          |Children crossing          |9.236798            |
 |4          |Ahead only|9.066751|
 |5          |Beware of ice/snow           |5.876662           |
+
+### Accuracy results of the test set vs new images
+The accuracy result of the tests set is 0.937, and for the new images, 0.857, which corresponds to only one wrong identified image. This performance is of course lower than the targeted 0.93 which was on the test dataset, but there were only 7 images used. Furthermore, 2 of them are more challenging to detect for the CNN, the goal of using new images being also to see what are the limits of the model architecture.
+
+Improvement suggestions are described in the next section.
 
 ## Possible improvements
 
